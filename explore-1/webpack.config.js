@@ -47,6 +47,15 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.(woff|woff2|ttf|eot|svg)$/,
+        use: {
+          loader: "file-loader",
+          options: {
+            outputPath: "font",
+          },
+        },
+      },
     ],
   },
 };
