@@ -1,4 +1,5 @@
 const path = require("path");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -12,7 +13,7 @@ module.exports = {
     path: path.resolve(__dirname, "./dist"),
     filename: "[name]-[chunkhash:6].js",
   },
-  plugins: [],
+  plugins: [new CleanWebpackPlugin()],
   module: {
     rules: [
       {
