@@ -40,10 +40,12 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif)$/,
         use: {
-          loader: "file-loader",
+          loader: "url-loader",
           options: {
             name: "[name]-[hash:6].[ext]",
             outputPath: "images/",
+            // url-loader 有limit, file-loader没有limit
+            limit: 5 * 1024,
           },
         },
       },
