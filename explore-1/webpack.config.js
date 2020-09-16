@@ -1,10 +1,12 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
-  // entry: "./src/index.js",
+  // entry: "./src/index.js,
   // entry: ["./src/index.js", "./src/user.js"],
+  devtool: "source-map",
   entry: {
     index: "./src/index.js",
     user: "./src/user.js",
@@ -13,7 +15,15 @@ module.exports = {
     path: path.resolve(__dirname, "./dist"),
     filename: "[name]-[chunkhash:6].js",
   },
-  plugins: [new CleanWebpackPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: "首页",
+      // 选择html模版
+      template: "./src/index.html",
+      filename: "index.html",
+    }),
+  ],
   module: {
     rules: [
       {
