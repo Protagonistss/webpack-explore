@@ -10,6 +10,15 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "./dist"),
-    filename: "[name].js",
+    filename: "[name]-[chunkhash:6].js",
+  },
+  plugins: [],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
   },
 };
