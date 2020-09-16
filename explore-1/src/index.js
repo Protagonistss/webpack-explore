@@ -1,6 +1,11 @@
 import { getUser } from "./user";
 import css from "./css/index.less";
 import picture from "./images/download.jpeg";
+import axios from "axios";
+
+axios.get("/api/info").then((res) => {
+  console.log("res", res);
+});
 
 function main() {
   console.log("hello world!!!!");

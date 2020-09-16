@@ -20,6 +20,18 @@ module.exports = {
     contentBase: path.resolve(__dirname, "./dist"),
     open: true,
     port: 8081,
+    // 第一种方式代理
+    proxy: {
+      "/api": {
+        target: "http://127.0.0.1:9098",
+      },
+    },
+    // 第二种方式 mock server
+    before(app, server) {
+      app.get("/api/info", (req, res) => {
+        res.json({ hello: "world" });
+      });
+    },
   },
   plugins: [
     new CleanWebpackPlugin(),
