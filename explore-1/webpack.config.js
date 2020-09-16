@@ -11,7 +11,6 @@ module.exports = {
   devtool: "source-map",
   entry: {
     index: "./src/index.js",
-    user: "./src/user.js",
   },
   output: {
     path: path.resolve(__dirname, "./dist"),
@@ -51,6 +50,31 @@ module.exports = {
   ],
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            // 语法转换 preset-env
+            presets: [
+              [
+                "@babel/preset-env",
+                {
+                  targets: {
+                    edge: "17",
+                    firefox: "60",
+                    chrome: "67",
+                    safari: "11.2",
+                  },
+                  corejs: 2,
+                  useBuiltIns: "usage",
+                },
+              ],
+            ],
+          },
+        },
+      },
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
