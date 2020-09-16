@@ -20,6 +20,23 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.less$/,
+        use: [
+          "style-loader",
+          // 开启css模块化
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+            },
+          },
+          {
+            loader: "postcss-loader",
+          },
+          "less-loader",
+        ],
+      },
     ],
   },
 };
