@@ -32,6 +32,9 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.11.5"
+    "@babel/polyfill": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }
