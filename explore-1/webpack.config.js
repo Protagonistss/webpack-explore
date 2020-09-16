@@ -1,6 +1,7 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "development",
@@ -15,8 +16,16 @@ module.exports = {
     path: path.resolve(__dirname, "./dist"),
     filename: "[name]-[chunkhash:6].js",
   },
+  devServer: {
+    contentBase: path.resolve(__dirname, "./dist"),
+    open: true,
+    port: 8081,
+  },
   plugins: [
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "css/[name]-[chunkhash:8].css",
+    }),
     new HtmlWebpackPlugin({
       title: "首页",
       // 选择html模版
@@ -33,7 +42,8 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          "style-loader",
+          // "style-loader",
+          MiniCssExtractPlugin.loader,
           // 开启css模块化
           {
             loader: "css-loader",
@@ -64,7 +74,7 @@ module.exports = {
         use: {
           loader: "file-loader",
           options: {
-            outputPath: "font",
+            outputPath: "font/",
           },
         },
       },
