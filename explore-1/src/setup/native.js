@@ -1,5 +1,5 @@
-import css from "./css/index.less";
-import picture from "./images/download.jpeg";
+import css from "../css/index.less";
+import picture from "../images/download.jpeg";
 import axios from "axios";
 
 axios.get("/api/info").then((res) => {

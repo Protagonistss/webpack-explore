@@ -1,10 +1,9 @@
 // init setup
-import "./native.js";
+import "./setup/native.js";
 
 // Js hmr
-// import counter from "./counter";
-// import number from "./number";
-
+// import counter from "./hmr/counter";
+// import number from "./hmr/number";
 // counter();
 // number();
 
@@ -18,16 +17,16 @@ import "./native.js";
 
 // es6 => es5
 // import "@babel/polyfill";
-// import "./es6-test";
+// import "./es6/es6-test";
 
-import React, { Component } from "react";
-import ReactDom from "react-dom";
-import _ from "lodash";
+// import React, { Component } from "react";
+// import ReactDom from "react-dom";
+// import _ from "lodash";
 
-class App extends Component {
-  render() {
-    return <div>hello world</div>;
-  }
-}
+// class App extends Component {
+//   render() {
+//     return <div>hello world</div>;
+//   }
+// }
 
-ReactDom.render(<App />, document.getElementById("root"));
+// ReactDom.render(<App />, document.getElementById("root"));
