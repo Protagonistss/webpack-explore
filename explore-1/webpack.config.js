@@ -38,9 +38,9 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    // new MiniCssExtractPlugin({
-    //   filename: "css/[name]-[chunkhash:8].css",
-    // }),
+    new MiniCssExtractPlugin({
+      filename: "css/[name]-[contenthash:8].css",
+    }),
     new HtmlWebpackPlugin({
       title: "首页",
       // 选择html模版
@@ -64,8 +64,8 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          "style-loader",
-          // MiniCssExtractPlugin.loader,
+          // "style-loader",
+          MiniCssExtractPlugin.loader,
           // 开启css模块化
           {
             loader: "css-loader",
