@@ -48,21 +48,34 @@ module.exports = {
       filename: "index.html",
     }),
   ],
+  resolve: {
+    modules: [path.resolve(__dirname, "./node_modules")],
+    alias: {
+      // 减少查找过程，起一个别名
+      "@": path.resolve(__dirname, "./src"),
+      react: "./node_modules/react/umd/react.production.min.js",
+      "react-dom": "./node_modules/react-dom/umd/react-dom.production.min.js",
+    },
+    extensions: ["js", ".json", ".jsx"],
+  },
+
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        include: path.resolve(__dirname, "./src"),
         use: {
           loader: "babel-loader",
         },
       },
       {
         test: /\.css$/,
+        include: path.resolve(__dirname, "./src"),
         use: ["style-loader", "css-loader"],
       },
       {
         test: /\.less$/,
+        include: path.resolve(__dirname, "./src"),
         use: [
           // "style-loader",
           MiniCssExtractPlugin.loader,
@@ -81,6 +94,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif)$/,
+        include: path.resolve(__dirname, "./src"),
         use: {
           loader: "url-loader",
           options: {
@@ -93,6 +107,7 @@ module.exports = {
       },
       {
         test: /\.(woff|woff2|ttf|eot|svg)$/,
+        include: path.resolve(__dirname, "./src"),
         use: {
           loader: "file-loader",
           options: {
