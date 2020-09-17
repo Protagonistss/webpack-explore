@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
+const OptimizeCssAssetsWebpackPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -38,6 +39,12 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new OptimizeCssAssetsWebpackPlugin({
+      cssProcessor: require("cssnano"),
+      cssProcessorOptions: {
+        discardComments: { removeAll: true },
+      },
+    }),
     new MiniCssExtractPlugin({
       filename: "css/[name]-[contenthash:8].css",
     }),
@@ -46,19 +53,26 @@ module.exports = {
       // 选择html模版
       template: "./src/index.html",
       filename: "index.html",
+      minify: {
+        removeComments: true, // 删除注释
+        collapseWhitespace: true, // 删除空白符与换行符
+        minifyCSS: true, // 压缩内联css
+      },
     }),
   ],
   resolve: {
     modules: [path.resolve(__dirname, "./node_modules")],
-    alias: {
-      // 减少查找过程，起一个别名
-      "@": path.resolve(__dirname, "./src"),
-      react: "./node_modules/react/umd/react.production.min.js",
-      "react-dom": "./node_modules/react-dom/umd/react-dom.production.min.js",
-    },
-    extensions: ["js", ".json", ".jsx"],
+    // alias: {
+    //   // 减少查找过程，起一个别名
+    //   "@": path.resolve(__dirname, "./src"),
+    //   react: "./node_modules/react/umd/react.production.min.js",
+    //   "react-dom": "./node_modules/react-dom/umd/react-dom.production.min.js",
+    // },
+    // extensions: ["js", ".json", ".jsx"],
   },
-
+  externals: {
+    lodash: "_",
+  },
   module: {
     rules: [
       {
