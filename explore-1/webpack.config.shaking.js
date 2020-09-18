@@ -9,6 +9,7 @@ const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 // const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 //   .BundleAnalyzerPlugin;
 const { DllReferencePlugin } = require("webpack");
+const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -58,6 +59,10 @@ module.exports = {
     new DllReferencePlugin({
       manifest: path.resolve(__dirname, "./dll/react-manifest.json"),
     }),
+    new DllReferencePlugin({
+      manifest: path.resolve(__dirname, "./dll/lodash-manifest.json"),
+    }),
+    new HardSourceWebpackPlugin(),
     new SpeedMeasurePlugin(),
     // new BundleAnalyzerPlugin(),
     new webpack.HotModuleReplacementPlugin(),
