@@ -1,6 +1,10 @@
 // init setup
-import "./setup/native.js";
-import { getUser } from "./shaking/shaking";
+// import "./setup/native.js";
+// import { getUser } from "./shaking/shaking";
+import _ from "lodash";
+import "./react";
+
+console.log("lodash", _.join(["1", "2", "3"], "*"));
 getUser("protagonisths");
 
 // Js hmr
@@ -20,15 +24,3 @@ getUser("protagonisths");
 // es6 => es5
 // import "@babel/polyfill";
 // import "./es6/es6-test";
-
-// import React, { Component } from "react";
-// import ReactDom from "react-dom";
-// import _ from "lodash";
-
-// class App extends Component {
-//   render() {
-//     return <div>hello world</div>;
-//   }
-// }
-
-// ReactDom.render(<App />, document.getElementById("root"));
