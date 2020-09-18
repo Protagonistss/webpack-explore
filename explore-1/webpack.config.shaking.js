@@ -10,6 +10,7 @@ const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 //   .BundleAnalyzerPlugin;
 const { DllReferencePlugin } = require("webpack");
 const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
+const HappyPack = require("happypack");
 
 module.exports = {
   mode: "development",
@@ -62,6 +63,11 @@ module.exports = {
     new DllReferencePlugin({
       manifest: path.resolve(__dirname, "./dll/lodash-manifest.json"),
     }),
+    new HappyPack({
+      id: "css",
+      loaders: ["style-loader", "css-loader"],
+      threads: 2,
+    }),
     new HardSourceWebpackPlugin(),
     new SpeedMeasurePlugin(),
     // new BundleAnalyzerPlugin(),
@@ -97,7 +103,7 @@ module.exports = {
       {
         test: /\.css$/,
         include: path.resolve(__dirname, "./src"),
-        use: ["style-loader", "css-loader"],
+        use: ["happypack/loader?id=css"],
       },
       {
         test: /\.less$/,
