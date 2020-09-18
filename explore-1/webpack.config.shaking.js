@@ -5,8 +5,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
 const PurifyCSS = require("purifycss-webpack");
 const glob = require("glob-all");
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const smp = new SpeedMeasurePlugin();
 
-module.exports = {
+const config = {
   mode: "development",
   devtool: "source-map",
   entry: {
@@ -130,3 +132,5 @@ module.exports = {
     ],
   },
 };
+
+module.exports = smp.wrap(config);
