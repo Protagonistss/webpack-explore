@@ -1,5 +1,7 @@
 // init setup
 import "./setup/native.js";
+import { getUser } from "./shaking/shaking";
+getUser("protagonisths");
 
 // Js hmr
 // import counter from "./hmr/counter";

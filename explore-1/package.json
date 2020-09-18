@@ -8,7 +8,8 @@
     "serve": "webpack-dev-server --config ./webpack.config.dev.js",
     "build": "webpack --config ./webpack.config.prod.js",
     "diff": "webpack --env.production --config ./webpack.config.diff.js",
-    "cross": "cross-env NODE_ENV=development webpack --config ./webpack.config.cross.js"
+    "cross": "cross-env NODE_ENV=development webpack --config ./webpack.config.cross.js",
+    "shaking": "webpack --config ./webpack.config.shaking.js"
   },
   "keywords": [],
   "author": "",
@@ -41,7 +42,10 @@
   "dependencies": {
     "@babel/polyfill": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
+    "glob-all": "^3.2.1",
     "lodash": "^4.17.20",
+    "purify-css": "^1.2.5",
+    "purifycss-webpack": "^0.7.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }
