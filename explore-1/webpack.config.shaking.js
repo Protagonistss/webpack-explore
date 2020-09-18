@@ -6,9 +6,10 @@ const webpack = require("webpack");
 const PurifyCSS = require("purifycss-webpack");
 const glob = require("glob-all");
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
-const smp = new SpeedMeasurePlugin();
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 
-const config = {
+module.exports = {
   mode: "development",
   devtool: "source-map",
   entry: {
@@ -53,6 +54,7 @@ const config = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new BundleAnalyzerPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
       filename: "css/[name]-[contenthash:8].css",
@@ -132,5 +134,3 @@ const config = {
     ],
   },
 };
-
-module.exports = smp.wrap(config);
