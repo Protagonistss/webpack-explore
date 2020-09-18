@@ -9,7 +9,8 @@
     "build": "webpack --config ./webpack.config.prod.js",
     "diff": "webpack --env.production --config ./webpack.config.diff.js",
     "cross": "cross-env NODE_ENV=development webpack --config ./webpack.config.cross.js",
-    "shaking": "webpack --config ./webpack.config.shaking.js"
+    "shaking": "webpack --config ./webpack.config.shaking.js",
+    "dll": "webpack --config ./webpack.config.dll.js"
   },
   "keywords": [],
   "author": "",

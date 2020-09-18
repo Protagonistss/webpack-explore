@@ -6,8 +6,9 @@ const webpack = require("webpack");
 const PurifyCSS = require("purifycss-webpack");
 const glob = require("glob-all");
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+//   .BundleAnalyzerPlugin;
+const { DllReferencePlugin } = require("webpack");
 
 module.exports = {
   mode: "development",
@@ -22,39 +23,43 @@ module.exports = {
   optimization: {
     usedExports: true,
     concatenateModules: true,
-    splitChunks: {
-      // 同步: initial, 异步: async, 所有模块: all
-      chunks: "all",
-      // 最小尺寸, 当模块大于30kb
-      minSize: 30000,
-      // 对模块进行二次分割时使用
-      maxSize: 0,
-      // 打包生成的chunk文件最少有几个chunks引用了这个模块
-      minChunks: 1,
-      //最大异步请求数,默认5
-      maxAsyncRequests: 5,
-      // 最大初始化请求数, 入口文件同步请求, 默认3
-      maxInitialRequests: 3,
-      // 打包分割符
-      automaticNameDelimiter: "-",
-      // 打包后的名称,处了bool值,还可以接受一个函数
-      name: true,
-      // 缓存
-      cacheGroups: {
-        lodash: {
-          test: /lodash/,
-          name: "lodash",
-        },
-        react: {
-          test: /react|react-dom/,
-          name: "react",
-        },
-      },
-    },
+    // splitChunks: {
+    //   // 同步: initial, 异步: async, 所有模块: all
+    //   chunks: "all",
+    //   // 最小尺寸, 当模块大于30kb
+    //   minSize: 30000,
+    //   // 对模块进行二次分割时使用
+    //   maxSize: 0,
+    //   // 打包生成的chunk文件最少有几个chunks引用了这个模块
+    //   minChunks: 1,
+    //   //最大异步请求数,默认5
+    //   maxAsyncRequests: 5,
+    //   // 最大初始化请求数, 入口文件同步请求, 默认3
+    //   maxInitialRequests: 3,
+    //   // 打包分割符
+    //   automaticNameDelimiter: "-",
+    //   // 打包后的名称,处了bool值,还可以接受一个函数
+    //   name: true,
+    //   // 缓存
+    //   cacheGroups: {
+    //     lodash: {
+    //       test: /lodash/,
+    //       name: "lodash",
+    //     },
+    //     react: {
+    //       test: /react|react-dom/,
+    //       name: "react",
+    //     },
+    //   },
+    // },
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new BundleAnalyzerPlugin(),
+    new DllReferencePlugin({
+      manifest: path.resolve(__dirname, "./dll/react-manifest.json"),
+    }),
+    new SpeedMeasurePlugin(),
+    // new BundleAnalyzerPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
       filename: "css/[name]-[contenthash:8].css",
